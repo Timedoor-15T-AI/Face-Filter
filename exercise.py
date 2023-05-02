@@ -7,12 +7,12 @@ faceMesh = mp_face_mesh.FaceMesh(static_image_mode=True) # static_image_mode=Tru
 
 # Function to plot the landmarks
 def plot_landmark(frame, facial_area_obj):
-    for source_idx, target_idx in facial_area_obj:
-        source = landmarks.landmark[source_idx]
-        target = landmarks.landmark[target_idx]
-        relative_source = (int(frame.shape[1] * source.x), int(frame.shape[0] * source.y))
-        relative_target = (int(frame.shape[1] * target.x), int(frame.shape[0] * target.y))
-        cv2.line(frame, relative_source, relative_target, (0, 255, 0), 2)
+    for source_idx, target_idx in facial_area_obj: # loop through the facial area object
+        source = landmarks.landmark[source_idx] # get the source landmark
+        target = landmarks.landmark[target_idx] # get the target landmark
+        relative_source = (int(frame.shape[1] * source.x), int(frame.shape[0] * source.y)) # get the relative source
+        relative_target = (int(frame.shape[1] * target.x), int(frame.shape[0] * target.y)) # get the relative target
+        cv2.line(frame, relative_source, relative_target, (255, 255, 255), 2)
 
 while True:
     ret, frame = cap.read() # ret is True if the frame is read correctly
