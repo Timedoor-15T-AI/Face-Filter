@@ -1,4 +1,4 @@
-# Meeting 6 - AI 2
+# Meeting 6 & 7 - AI 2
 ### Face Filter
 
 ## Setup
