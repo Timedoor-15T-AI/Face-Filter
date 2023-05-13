@@ -6,8 +6,8 @@ detector = fmd.FaceMesh() # initialize the FaceMesh class
 cap = cv2.VideoCapture(0) # 0 for webcam
 cap.set(3, 1280) # set width
 cap.set(4, 720) # set height
-left_eye = cv2.imread("./assets/eye1.png") # read the left eye image
-right_eye = cv2.imread("./assets/eye2.png") # read the right eye image
+left_eye = cv2.imread("./assets/sharingan.png") # read the left eye image
+right_eye = cv2.imread("./assets/sharingan.png") # read the right eye image
 smoke_animation = cv2.VideoCapture("./assets/smoke_animation.mp4") # read the smoke animation video
 smoke_frame_counter = 0 # initialize the smoke frame counter
 
@@ -22,14 +22,14 @@ while True:
     frame_face_mesh, face_mesh_result = detector.detectFacialLandmarks(frame, detector.faceMeshVideos) # detect the facial landmarks
 
     if face_mesh_result.multi_face_landmarks: # if there are faces detected
-        mouth_frame, mouth_status = detector.isOpen(frame, face_mesh_result, 'MOUTH', threshold=15) # check if the mouth is open
-        left_eye_frame, left_eye_status = detector.isOpen(frame, face_mesh_result, 'LEFT EYE', threshold=4.5) # check if the left eye is open
-        right_eye_frame, right_eye_status = detector.isOpen(frame, face_mesh_result, 'RIGHT EYE', threshold=4.5) # check if the right eye is open
+        mouth_frame, mouth_status = detector.isOpen(frame, face_mesh_result, 'MOUTH', threshold = 15) # check if the mouth is open
+        left_eye_frame, left_eye_status = detector.isOpen(frame, face_mesh_result, 'LEFT EYE', threshold = 2.5) # check if the left eye is open
+        right_eye_frame, right_eye_status = detector.isOpen(frame, face_mesh_result, 'RIGHT EYE', threshold=2.5) # check if the right eye is open
 
         for face_num, face_landmarks in enumerate(face_mesh_result.multi_face_landmarks):
             if left_eye_status[face_num] == 'OPEN':
                 frame = detector.masking(frame, left_eye, face_landmarks, 'LEFT EYE', detector.mpFaceMesh.FACEMESH_LEFT_EYE) # mask the left eye
-            
+
             if right_eye_status[face_num] == 'OPEN':
                 frame = detector.masking(frame, right_eye, face_landmarks, 'RIGHT EYE', detector.mpFaceMesh.FACEMESH_RIGHT_EYE)
 
